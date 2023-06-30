@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\Nowy folder\\BookStore\\BookStore\\BookStore.csproj": {}
+    "C:\\Users\\User\\Desktop\\Nowy\\BookStore\\BookStore\\BookStore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\Nowy folder\\BookStore\\BookStore\\BookStore.csproj": {
+    "C:\\Users\\User\\Desktop\\Nowy\\BookStore\\BookStore\\BookStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\Nowy folder\\BookStore\\BookStore\\BookStore.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Nowy\\BookStore\\BookStore\\BookStore.csproj",
         "projectName": "BookStore",
-        "projectPath": "C:\\Users\\User\\Desktop\\Nowy folder\\BookStore\\BookStore\\BookStore.csproj",
+        "projectPath": "C:\\Users\\User\\Desktop\\Nowy\\BookStore\\BookStore\\BookStore.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\Nowy folder\\BookStore\\BookStore\\obj\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Nowy\\BookStore\\BookStore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,20 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.8, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
