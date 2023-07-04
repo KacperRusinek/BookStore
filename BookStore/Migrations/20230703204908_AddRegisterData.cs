@@ -5,7 +5,7 @@
 namespace BookStore.Migrations
 {
     /// <inheritdoc />
-    public partial class Init_3 : Migration
+    public partial class AddRegisterData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

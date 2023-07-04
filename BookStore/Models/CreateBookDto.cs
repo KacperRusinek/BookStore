@@ -1,7 +1,10 @@
-﻿namespace BookStore.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BookStore.Models
 {
-    public class AddBook
+    public class CreateBookDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string FirstNameOfAuthor { get; set; }
         public string LastNameOfAuthor { get; set; }
@@ -10,4 +13,5 @@
 
         public DateTime PublicationDate { get; set; }
     }
+
 }

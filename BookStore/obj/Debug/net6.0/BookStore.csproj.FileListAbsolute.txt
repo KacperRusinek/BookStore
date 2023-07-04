@@ -80,3 +80,13 @@ C:\Users\User\Desktop\Nowy\BookStore\BookStore\obj\Debug\net6.0\refint\BookStore
 C:\Users\User\Desktop\Nowy\BookStore\BookStore\obj\Debug\net6.0\BookStore.pdb
 C:\Users\User\Desktop\Nowy\BookStore\BookStore\obj\Debug\net6.0\BookStore.genruntimeconfig.cache
 C:\Users\User\Desktop\Nowy\BookStore\BookStore\obj\Debug\net6.0\ref\BookStore.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\NLog.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\NLog.Extensions.Logging.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\nlog.config
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

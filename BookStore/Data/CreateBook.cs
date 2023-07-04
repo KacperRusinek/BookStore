@@ -1,7 +1,10 @@
-﻿namespace BookStore.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BookStore.Data
 {
-    public class UpdateBook
+    public class CreateBook
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string FirstNameOfAuthor { get; set; }
         public string LastNameOfAuthor { get; set; }

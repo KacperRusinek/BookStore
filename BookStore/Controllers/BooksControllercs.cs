@@ -1,5 +1,7 @@
 ﻿using BookStore.Data;
 using BookStore.Models;
+using BookStore.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,94 +9,78 @@ namespace BookStore.Controllers
 {
     [ApiController]
     [Route("api/BookStore")]
+    [Authorize]
     public class BooksControllercs : Controller
     {
-        private readonly BookStoreDbContext _bookStoreDb;
-        public BooksControllercs(BookStoreDbContext bookStoreDb)
+       
+        private readonly ILogger<BookStoreService> _logger;
+        private readonly IBookStoreService _bookStoreService;
+        public BooksControllercs(IBookStoreService IBS, ILogger<BookStoreService> logger)
         {
-
-            _bookStoreDb = bookStoreDb;
+            _bookStoreService = IBS;
+            _logger = logger;
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetBooks()
+        
+        public IEnumerable<CreateBookDto> GetAll()
         {
-            return Ok(await _bookStoreDb.Books.ToListAsync());
+            var books = _bookStoreService.GetAll();
+            return books;
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetBookById([FromRoute] int id)
-        {
-            var book = await _bookStoreDb.Books.FindAsync(id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(book);
-            }
-
+        public IActionResult GetById([FromRoute] int id)
+        { 
+            var BookById = _bookStoreService.GetById(id);
+            return Ok(BookById);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBook(AddBook addBook)
+        public ActionResult Create([FromBody] CreateBookDto addBook)
         {
-
-            var book = new CreateBook()
-            {
-                Title = addBook.Title,
-                FirstNameOfAuthor = addBook.FirstNameOfAuthor,
-                LastNameOfAuthor = addBook.LastNameOfAuthor,
-                Species = addBook.Species,
-                NumberOfPages = addBook.NumberOfPages,
-                PublicationDate = addBook.PublicationDate
-            };
-            await _bookStoreDb.Books.AddAsync(book); //async dlatego bo funkcja jest async rownież a to po to aby inne zapytania mogly sie wykonywac podczas innych
-            await _bookStoreDb.SaveChangesAsync();
-            return Ok(book);
+            var id = _bookStoreService.Create(addBook);
+            return Created($"/api/restaurant/{id}", null);
         }
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> UpdateBook([FromRoute] int id, UpdateBook updateBook)
+        public ActionResult UpdateBook([FromRoute] int id, UpdateBookDto updateBook)
         {
-            var book = await _bookStoreDb.Books.FindAsync(id);
-            if (book == null)
+            
+            bool isUpdated = _bookStoreService.UpdateBook(id, updateBook);
+            if (isUpdated)
+            {
+                return Ok(updateBook);
+            }
+            else
             {
                 return NotFound();
-            } else
-            {
-                book.Title = updateBook.Title;
-                book.FirstNameOfAuthor = updateBook.FirstNameOfAuthor;
-                book.LastNameOfAuthor = updateBook.LastNameOfAuthor;
-                book.Species = updateBook.Species;
-                book.NumberOfPages = updateBook.NumberOfPages;
-                book.PublicationDate = updateBook.PublicationDate;
-
-                await _bookStoreDb.SaveChangesAsync();
-                return Ok(book);
-                    
             }
 
-
         }
+
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> DeleteBook([FromRoute] int id)
+        public ActionResult DeleteBook([FromRoute] int id)
         {
-            var book = await _bookStoreDb.Books.FindAsync(id);
-            if(book == null)
+            bool isDeleted = _bookStoreService.DeleteBook(id);
+            if (isDeleted)
+            {
+                return Ok();
+            }
+            else
             {
                 return NotFound();
-            } else
-            {
-                _bookStoreDb.Remove(book);
-                await _bookStoreDb.SaveChangesAsync();
-                return Ok();
             }
 
         }
 
+
     }
+
+   
+
 }
+
