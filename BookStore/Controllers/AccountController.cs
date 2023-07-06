@@ -17,7 +17,7 @@ namespace BookStore.Controllers
             _accountService = accountService;
         }
 
-        [HttpPost("register")]// oprocz zwyklej sciezki jak kkontroler bedzie jeszcze register
+        [HttpPost("register")]// oprocz zwyklej sciezki jak kontroler bedzie jeszcze register
         public ActionResult RegisterUser([FromBody] UserDto dto)
         {
             _accountService.RegisterUser(dto);

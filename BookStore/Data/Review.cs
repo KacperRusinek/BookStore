@@ -12,7 +12,7 @@ namespace BookStore.Data
         public string TitleOfBook { get; set; }
         public int BookId { get; set; } //klucz obcy
         public CreateBook Book { get; set; } //nawigacyjne pole - ksiażki dla danej opinii
-        //public ICollection<Review> Reviews { get; set; }
+  
 
     }
 }
