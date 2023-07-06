@@ -6,6 +6,6 @@ namespace BookStore.Services
 {
     public interface IReviewService
     {
-        public int CreateReview([FromBody] ReviewDto dto);
+        public int CreateReview([FromBody] int bookId, ReviewDto dto);
     }
 }

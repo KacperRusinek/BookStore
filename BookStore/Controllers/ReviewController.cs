@@ -18,9 +18,9 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddReview([FromBody] ReviewDto dto)
+        public IActionResult AddReview([FromBody] int bookId,ReviewDto dto)
         {
-            var review = _reviewService.CreateReview(dto);
+            var review = _reviewService.CreateReview(bookId,dto);
             return Created($"{review}", null);
 
         }

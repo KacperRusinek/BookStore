@@ -22,14 +22,14 @@ namespace BookStore.Data
                     Content = "Ciekawa opowieść al",
                     rating = 4,
                     TitleOfBook = "Adam w krainie czarów",
-                    //BookId = 1,
+                    BookId = 1,
 
                 });
-
-            modelBuilder.Entity<CreateBook>()
-          .HasMany(b => b.Reviews)
-          .WithOne(r => r.Book)
-          .HasForeignKey(r => r.BookId);
+ 
+                 modelBuilder.Entity<CreateBook>()
+                 .HasMany(b => b.Reviews)
+                 .WithOne(r => r.Book)
+                 .HasForeignKey(r => r.BookId);
 
 
 
