@@ -26,7 +26,7 @@ namespace BookStore.Services
         public void RegisterUser(UserDto user)
         {
             var usere = _mapper.Map<User>(user);
-            var UsereHash = _passwordHasher.HashPassword(usere, user.PasswordHash);
+            var UsereHash = _passwordHasher.HashPassword(usere, user.Password);
             usere.PasswordHash = UsereHash; 
             _dbContext.Users.Add(usere);
             _dbContext.SaveChanges();              
@@ -57,6 +57,7 @@ namespace BookStore.Services
                 new Claim("DateOfBirth", user.DateOfBirth.Value.ToString("yyyy-MM-dd")),
                 new Claim("Nationality", user.Nationality)
             };
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.JwtKey));
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(_settings.JwtExpireDays);

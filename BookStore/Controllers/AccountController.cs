@@ -28,7 +28,6 @@ namespace BookStore.Controllers
         {
             string token = _accountService.GenerateJwt(dto);
             return Ok(token);
-        
         }
     }
 }

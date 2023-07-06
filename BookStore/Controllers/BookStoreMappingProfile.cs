@@ -40,7 +40,19 @@ namespace BookStore.Controllers
             //              .ForMember(m => m.RoleId, c => c.MapFrom(s => s.RoleId));
 
             CreateMap<UserDto, User>();
-    
+
+            CreateMap<CreateBook, CreateBookDto>();
+            CreateMap<CreateBookDto, CreateBook>();
+
+            CreateMap<Review, ReviewDto>()
+              .ForMember(m => m.Content, c => c.MapFrom(s => s.Content))
+              .ForMember(m => m.rating, c => c.MapFrom(s => s.rating))
+              .ForMember(m => m.TitleOfBook, c => c.MapFrom(s => s.TitleOfBook));
+
+            CreateMap<ReviewDto, Review>()
+                .ForMember(m => m.Content, c => c.MapFrom(s => s.Content))
+                .ForMember(m => m.rating, c => c.MapFrom(s => s.rating))
+                .ForMember(m => m.TitleOfBook, c => c.MapFrom(s => s.TitleOfBook));
 
 
 
@@ -50,5 +62,10 @@ namespace BookStore.Controllers
 
 
         }
+
+
+
+
     }
+    
 }

@@ -43,6 +43,7 @@ try{
     builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
     builder.Services.AddAutoMapper(typeof(BookStoreMappingProfile).Assembly);
     builder.Services.AddScoped<IAccountService, AccountService>();
+    builder.Services.AddScoped<IReviewService, ReviewService>();
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddScoped<IValidator<UserDto>, RegisterUserValidator>();
     builder.Configuration.GetSection("Authentication").Bind(aths);
@@ -80,7 +81,7 @@ try{
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
-    app.UseAuthorization();
+ 
 
     app.MapControllers();
 

@@ -4,6 +4,7 @@ namespace BookStore.Data
 {
     public class CreateBook
     {
+        [Key]
         public int Id { get; set; }
         public string Title { get; set; }
         public string FirstNameOfAuthor { get; set; }
@@ -12,5 +13,9 @@ namespace BookStore.Data
         public int NumberOfPages { get; set; }
 
         public DateTime PublicationDate { get; set; }
+        //public List<Review> Reviews { get; set; }
+        public ICollection<Review> Reviews { get; set; }
+        
+
     }
 }

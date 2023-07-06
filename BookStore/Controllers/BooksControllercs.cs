@@ -9,7 +9,7 @@ namespace BookStore.Controllers
 {
     [ApiController]
     [Route("api/BookStore")]
-    [Authorize]
+    //[Authorize]
     public class BooksControllercs : Controller
     {
        
@@ -22,7 +22,8 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
-        
+        //[Authorize] //dodajemy po to, aby tylko użytkownik który ma prawa do przeglądania wszystkiego to robił
+        //[Authorize(Roles = "Administrator,Manager")]
         public IEnumerable<CreateBookDto> GetAll()
         {
             var books = _bookStoreService.GetAll();
@@ -31,6 +32,7 @@ namespace BookStore.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        //[AllowAnonymous]
         public IActionResult GetById([FromRoute] int id)
         { 
             var BookById = _bookStoreService.GetById(id);
@@ -38,10 +40,12 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
+        //[Authorize(Roles = "Administrator,Manager")]
         public ActionResult Create([FromBody] CreateBookDto addBook)
         {
             var id = _bookStoreService.Create(addBook);
             return Created($"/api/restaurant/{id}", null);
+            
         }
 
         [HttpPut]
