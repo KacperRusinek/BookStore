@@ -19,7 +19,7 @@ namespace BookStore.Middleware
                 await next.Invoke(context);
 
             }
-        
+
             catch (BadHttpRequestException badHttpRequestException)
             {
                 context.Response.StatusCode = 400;
@@ -28,11 +28,15 @@ namespace BookStore.Middleware
             catch (Exception e)
             {
                 _logger.LogError(e, e.Message);
-
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsync("Something went wrong");
-
             }
         }
     }
 }
+
+
+
+
+
+

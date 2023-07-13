@@ -28,11 +28,17 @@ namespace BookStore.Services
             return booksDto;
         }
 
+
+
+
         public CreateBookDto GetById(int id)
         {
             var book = _dbContext.Books.FirstOrDefault(b => b.Id == id);
-            var bookDto = _mapper.Map<CreateBookDto>(book);
-            return bookDto;
+        
+                var bookDto = _mapper.Map<CreateBookDto>(book);
+                return bookDto;
+            
+            
         }
         public int Create(CreateBookDto addBook)
         {
@@ -72,10 +78,25 @@ namespace BookStore.Services
                 _dbContext.SaveChanges();
                 return true;
             }
-
             return false;
         }
 
+        //[NonAction]
+        public IEnumerable<CreateBookDto> GetBookByNumberOfPages(int NumberOfPages) //filtrowanie ksiazek do max stron
+        {
+            var books = _dbContext
+                .Books
+                .Where(n => n.NumberOfPages <= NumberOfPages)
+                .ToList();
+
+            if (books.Count == 0)
+            {
+                return null;
+            }
+
+            var booksDto = _mapper.Map<List<CreateBookDto>>(books);
+            return booksDto;
+        }
 
     }
 }

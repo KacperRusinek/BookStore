@@ -10,6 +10,7 @@ namespace BookStore.Services
           public bool UpdateBook(int id,UpdateBookDto updateBook);
           public bool DeleteBook(int id);
           public IEnumerable<CreateBookDto> GetAll();
+          public IEnumerable<CreateBookDto> GetBookByNumberOfPages(int NumberOfPages);
           public CreateBookDto GetById(int id);
     }
 }

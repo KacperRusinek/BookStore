@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Data
 {
@@ -11,11 +12,7 @@ namespace BookStore.Data
         public string LastNameOfAuthor { get; set; }
         public string Species { get; set; }
         public int NumberOfPages { get; set; }
-
         public DateTime PublicationDate { get; set; }
-        //public List<Review> Reviews { get; set; }
-        public ICollection<Review> Reviews { get; set; }
-        
 
-    }
+    } 
 }

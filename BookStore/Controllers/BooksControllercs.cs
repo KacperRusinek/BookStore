@@ -4,13 +4,14 @@ using BookStore.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookStore.Controllers
 {
     [ApiController]
     [Route("api/BookStore")]
-    //[Authorize]
-    public class BooksControllercs : Controller
+    [Authorize]
+    public class BooksControllercs : ControllerBase
     {
        
         private readonly ILogger<BookStoreService> _logger;
@@ -21,9 +22,8 @@ namespace BookStore.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        //[Authorize] //dodajemy po to, aby tylko użytkownik który ma prawa do przeglądania wszystkiego to robił
-        //[Authorize(Roles = "Administrator,Manager")]
+        [HttpGet("All")]
+        [AllowAnonymous]
         public IEnumerable<CreateBookDto> GetAll()
         {
             var books = _bookStoreService.GetAll();
@@ -32,15 +32,37 @@ namespace BookStore.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public IActionResult GetById([FromRoute] int id)
         { 
             var BookById = _bookStoreService.GetById(id);
+            if(BookById == null)
+            {
+                return NotFound();
+            }
             return Ok(BookById);
         }
 
-        [HttpPost]
-        //[Authorize(Roles = "Administrator,Manager")]
+        [HttpGet("NumberOfPages")]
+        [AllowAnonymous]
+        public ActionResult<IEnumerable<CreateBook>> GetBookByNumberOfPages([FromQuery] int NumberOfPages)
+        {
+            var books = _bookStoreService.GetBookByNumberOfPages(NumberOfPages);
+            if (books == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(books);
+            }
+            
+        }
+
+
+
+        [HttpPost("AddBook")]
+        [AllowAnonymous]
         public ActionResult Create([FromBody] CreateBookDto addBook)
         {
             var id = _bookStoreService.Create(addBook);
@@ -50,6 +72,7 @@ namespace BookStore.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [AllowAnonymous]
         public ActionResult UpdateBook([FromRoute] int id, UpdateBookDto updateBook)
         {
             
@@ -67,6 +90,7 @@ namespace BookStore.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [AllowAnonymous]
         public ActionResult DeleteBook([FromRoute] int id)
         {
             bool isDeleted = _bookStoreService.DeleteBook(id);
@@ -80,6 +104,7 @@ namespace BookStore.Controllers
             }
 
         }
+        
 
 
     }

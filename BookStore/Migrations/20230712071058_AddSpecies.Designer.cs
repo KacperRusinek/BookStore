@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Migrations
 {
     [DbContext(typeof(BookStoreDbContext))]
-    [Migration("20230706150307_AddReview_3")]
-    partial class AddReview_3
+    [Migration("20230712071058_AddSpecies")]
+    partial class AddSpecies
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,10 +48,15 @@ namespace BookStore.Migrations
                     b.Property<string>("Species")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SpeciesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SpeciesId");
 
                     b.ToTable("Books");
 
@@ -64,44 +69,8 @@ namespace BookStore.Migrations
                             NumberOfPages = 860,
                             PublicationDate = new DateTime(1890, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Species = "Obraz społeczeństwa warszawskiego w drugiej połowie XIX wieku.",
+                            SpeciesId = 0,
                             Title = "Lalka"
-                        });
-                });
-
-            modelBuilder.Entity("BookStore.Data.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TitleOfBook")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("rating")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("Reviews");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BookId = 1,
-                            Content = "Ciekawa opowieść al",
-                            TitleOfBook = "Adam w krainie czarów",
-                            rating = 4
                         });
                 });
 
@@ -137,6 +106,25 @@ namespace BookStore.Migrations
                             Id = 3,
                             Name = "Administrator"
                         });
+                });
+
+            modelBuilder.Entity("BookStore.Data.Species", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Species");
                 });
 
             modelBuilder.Entity("BookStore.Data.User", b =>
@@ -181,15 +169,15 @@ namespace BookStore.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BookStore.Data.Review", b =>
+            modelBuilder.Entity("BookStore.Data.CreateBook", b =>
                 {
-                    b.HasOne("BookStore.Data.CreateBook", "Book")
-                        .WithMany("Reviews")
-                        .HasForeignKey("BookId")
+                    b.HasOne("BookStore.Data.Species", "SpeciesTable")
+                        .WithMany("Books")
+                        .HasForeignKey("SpeciesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Book");
+                    b.Navigation("SpeciesTable");
                 });
 
             modelBuilder.Entity("BookStore.Data.User", b =>
@@ -203,9 +191,9 @@ namespace BookStore.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("BookStore.Data.CreateBook", b =>
+            modelBuilder.Entity("BookStore.Data.Species", b =>
                 {
-                    b.Navigation("Reviews");
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
