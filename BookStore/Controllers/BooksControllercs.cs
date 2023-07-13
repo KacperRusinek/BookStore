@@ -22,11 +22,21 @@ namespace BookStore.Controllers
             _logger = logger;
         }
 
-        [HttpGet("All")]
-        [AllowAnonymous]
+        [HttpGet]
+        //[Authorize] //dodajemy po to, aby tylko użytkownik który ma prawa do przeglądania wszystkiego to robił
+        //[Authorize(Roles = "Administrator,Manager")]
         public IEnumerable<CreateBookDto> GetAll()
         {
             var books = _bookStoreService.GetAll();
+            return books;
+        }
+
+
+        [HttpGet("SortAscDesc")]
+        [AllowAnonymous]
+        public IEnumerable<CreateBookDto> GetAscDesc(string SortOrder)  //metoda do pobierania książek asc/desc
+        {
+            var books = _bookStoreService.GetAscDesc(SortOrder);
             return books;
         }
 
@@ -58,6 +68,10 @@ namespace BookStore.Controllers
             }
             
         }
+
+
+
+      
 
 
 
@@ -104,7 +118,12 @@ namespace BookStore.Controllers
             }
 
         }
+
+
         
+
+
+
 
 
     }

@@ -15,6 +15,7 @@ namespace BookStore.Controllers
                 .ForMember(m => m.LastNameOfAuthor, c => c.MapFrom(s => s.LastNameOfAuthor))
                 .ForMember(m => m.Species, c => c.MapFrom(s => s.Species))
                 .ForMember(m => m.NumberOfPages, c => c.MapFrom(s => s.NumberOfPages))
+                //.ForMember(m => m.Rating, c => c.MapFrom(s => s.Rating))
                 .ForMember(m => m.PublicationDate, c => c.MapFrom(s => s.PublicationDate));
             CreateMap<CreateBookDto, CreateBook>()
                 .ForMember(m => m.Title, c => c.MapFrom(s => s.Title))
@@ -22,6 +23,7 @@ namespace BookStore.Controllers
                 .ForMember(m => m.LastNameOfAuthor, c => c.MapFrom(s => s.LastNameOfAuthor))
                 .ForMember(m => m.Species, c => c.MapFrom(s => s.Species))
                 .ForMember(m => m.NumberOfPages, c => c.MapFrom(s => s.NumberOfPages))
+                // .ForMember(m => m.Rating, c => c.MapFrom(s => s.Rating))
                 .ForMember(m => m.PublicationDate, c => c.MapFrom(s => s.PublicationDate));
 
 

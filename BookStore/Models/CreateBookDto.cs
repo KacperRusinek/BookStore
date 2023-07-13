@@ -10,6 +10,7 @@ namespace BookStore.Models
         public string LastNameOfAuthor { get; set; }
         public string Species { get; set; }
         public int NumberOfPages { get; set; }
+        public int Rating { get; set; } // od 1 do 10
 
         public DateTime PublicationDate { get; set; }
     }

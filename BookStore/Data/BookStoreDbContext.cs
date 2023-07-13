@@ -36,6 +36,7 @@ namespace BookStore.Data
                     LastNameOfAuthor = "Prus",
                     Species = "Obraz społeczeństwa warszawskiego w drugiej połowie XIX wieku.",
                     NumberOfPages = 860,
+                    //Rating = 8,
                     PublicationDate = new DateTime(1890, 01, 25),
                 });
             base.OnModelCreating(modelBuilder);

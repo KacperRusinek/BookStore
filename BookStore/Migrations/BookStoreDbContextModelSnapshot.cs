@@ -17,7 +17,7 @@ namespace BookStore.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.8")
+                .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -42,18 +42,16 @@ namespace BookStore.Migrations
                     b.Property<DateTime>("PublicationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.Property<string>("Species")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SpeciesId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SpeciesId");
 
                     b.ToTable("Books");
 
@@ -65,8 +63,8 @@ namespace BookStore.Migrations
                             LastNameOfAuthor = "Prus",
                             NumberOfPages = 860,
                             PublicationDate = new DateTime(1890, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rating = 0,
                             Species = "Obraz społeczeństwa warszawskiego w drugiej połowie XIX wieku.",
-                            SpeciesId = 0,
                             Title = "Lalka"
                         });
                 });
@@ -103,25 +101,6 @@ namespace BookStore.Migrations
                             Id = 3,
                             Name = "Administrator"
                         });
-                });
-
-            modelBuilder.Entity("BookStore.Data.Species", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Species");
                 });
 
             modelBuilder.Entity("BookStore.Data.User", b =>
@@ -166,17 +145,6 @@ namespace BookStore.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("BookStore.Data.CreateBook", b =>
-                {
-                    b.HasOne("BookStore.Data.Species", "SpeciesTable")
-                        .WithMany("Books")
-                        .HasForeignKey("SpeciesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SpeciesTable");
-                });
-
             modelBuilder.Entity("BookStore.Data.User", b =>
                 {
                     b.HasOne("BookStore.Data.Role", "Role")
@@ -186,11 +154,6 @@ namespace BookStore.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("BookStore.Data.Species", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

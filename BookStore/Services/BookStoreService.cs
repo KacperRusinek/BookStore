@@ -3,7 +3,10 @@ using BookStore.Data;
 using BookStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Globalization;
 using static System.Reflection.Metadata.BlobBuilder;
+using Microsoft.Data.SqlClient;
 
 namespace BookStore.Services
 {
@@ -20,12 +23,37 @@ namespace BookStore.Services
             _logger = logger;
             _mapper = mapper;
         }
-
         public IEnumerable<CreateBookDto> GetAll()
         {
             var books = _dbContext.Books.ToList();
             var booksDto = _mapper.Map<List<CreateBookDto>>(books);
             return booksDto;
+        }
+        public IEnumerable<CreateBook> GetAllBooks()
+        {
+            return _dbContext.Books.ToList();
+        }
+
+        public IEnumerable<CreateBookDto> GetAscDesc(string SortOrder)
+        {
+            var books = GetAll();
+
+            if (!string.IsNullOrEmpty(SortOrder))
+            {
+                switch (SortOrder.ToLower())
+                {
+                    case "asc":
+                        books = books.OrderBy(b => b.Rating);
+                        break;
+                    case "desc":
+                        books = books.OrderByDescending(b => b.Rating);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return books;
         }
 
 
@@ -97,6 +125,9 @@ namespace BookStore.Services
             var booksDto = _mapper.Map<List<CreateBookDto>>(books);
             return booksDto;
         }
+       
+
+
 
     }
 }
