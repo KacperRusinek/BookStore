@@ -13,18 +13,17 @@ namespace BookStore.Controllers
     [Authorize]
     public class BooksControllercs : ControllerBase
     {
-       
+
         private readonly ILogger<BookStoreService> _logger;
         private readonly IBookStoreService _bookStoreService;
-        public BooksControllercs(IBookStoreService IBS, ILogger<BookStoreService> logger)
+        public BooksControllercs(IBookStoreService bookStoreService, ILogger<BookStoreService> logger)
         {
-            _bookStoreService = IBS;
+            _bookStoreService = bookStoreService;
             _logger = logger;
         }
 
-        [HttpGet]
-        //[Authorize] //dodajemy po to, aby tylko użytkownik który ma prawa do przeglądania wszystkiego to robił
-        //[Authorize(Roles = "Administrator,Manager")]
+        [HttpGet("GetAll")]
+        [AllowAnonymous]
         public IEnumerable<CreateBookDto> GetAll()
         {
             var books = _bookStoreService.GetAll();
@@ -41,19 +40,19 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("GetById")]
         [AllowAnonymous]
         public IActionResult GetById([FromRoute] int id)
-        { 
+        {
             var BookById = _bookStoreService.GetById(id);
-            if(BookById == null)
+            if (BookById == null)
             {
                 return NotFound();
             }
             return Ok(BookById);
         }
 
-        [HttpGet("NumberOfPages")]
+        [HttpGet("GetByNumberOfPages")]
         [AllowAnonymous]
         public ActionResult<IEnumerable<CreateBook>> GetBookByNumberOfPages([FromQuery] int NumberOfPages)
         {
@@ -66,14 +65,8 @@ namespace BookStore.Controllers
             {
                 return Ok(books);
             }
-            
+
         }
-
-
-
-      
-
-
 
         [HttpPost("AddBook")]
         [AllowAnonymous]
@@ -81,15 +74,14 @@ namespace BookStore.Controllers
         {
             var id = _bookStoreService.Create(addBook);
             return Created($"/api/restaurant/{id}", null);
-            
+
         }
 
-        [HttpPut]
-        [Route("{id}")]
+        [HttpPut("UpdateById")]
         [AllowAnonymous]
         public ActionResult UpdateBook([FromRoute] int id, UpdateBookDto updateBook)
         {
-            
+
             bool isUpdated = _bookStoreService.UpdateBook(id, updateBook);
             if (isUpdated)
             {
@@ -102,8 +94,7 @@ namespace BookStore.Controllers
 
         }
 
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpDelete("DeleteById")]
         [AllowAnonymous]
         public ActionResult DeleteBook([FromRoute] int id)
         {
@@ -120,7 +111,7 @@ namespace BookStore.Controllers
         }
 
 
-        
+
 
 
 
@@ -128,7 +119,7 @@ namespace BookStore.Controllers
 
     }
 
-   
+
 
 }
 

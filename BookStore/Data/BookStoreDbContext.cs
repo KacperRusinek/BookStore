@@ -11,16 +11,23 @@ namespace BookStore.Data
         public DbSet<CreateBook> Books { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Review> Reviews { get; set; }
       
- 
-        
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-                
+            modelBuilder.Entity<Review>().HasData(
+                new Review
+                {
+                    Id = 1,
+                    Content = "ksiazka o pieknej przyrodzie",
+                    BookId = 1,
 
+                });
+
+             modelBuilder.Entity<CreateBook>()
+               .HasMany(b => b.Reviews)
+               .WithOne(r => r.Book)
+               .HasForeignKey(r => r.BookId);
 
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "User" },
@@ -36,7 +43,6 @@ namespace BookStore.Data
                     LastNameOfAuthor = "Prus",
                     Species = "Obraz społeczeństwa warszawskiego w drugiej połowie XIX wieku.",
                     NumberOfPages = 860,
-                    //Rating = 8,
                     PublicationDate = new DateTime(1890, 01, 25),
                 });
             base.OnModelCreating(modelBuilder);

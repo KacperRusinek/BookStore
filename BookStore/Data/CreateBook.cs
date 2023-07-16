@@ -14,6 +14,7 @@ namespace BookStore.Data
         public int NumberOfPages { get; set; }
         public int Rating { get; set; }
         public DateTime PublicationDate { get; set; }
+        public ICollection<Review> Reviews { get; set; }
 
     } 
 }

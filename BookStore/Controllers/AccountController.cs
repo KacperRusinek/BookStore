@@ -8,7 +8,7 @@ using Microsoft.Identity.Client;
 
 namespace BookStore.Controllers
 {
-    [ApiController] //proces walidacji modelu automatycznie
+    [ApiController]
     [Route("api/account")]
 
     public class AccountController : ControllerBase
@@ -29,11 +29,11 @@ namespace BookStore.Controllers
             //var responseDto = _mapper.Map<UserDto>(dto);
             //responseDto.Role = null;
             return Ok();
-            
+
         }
 
         [HttpPost("login")]
-        public ActionResult Login([FromBody] LoginDto dto) 
+        public ActionResult Login([FromBody] LoginDto dto)
         {
             string token = _accountService.GenerateJwt(dto);
             return Ok(token);

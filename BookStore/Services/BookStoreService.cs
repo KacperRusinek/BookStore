@@ -7,6 +7,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Globalization;
 using static System.Reflection.Metadata.BlobBuilder;
 using Microsoft.Data.SqlClient;
+using FluentValidation;
 
 namespace BookStore.Services
 {
@@ -17,11 +18,13 @@ namespace BookStore.Services
         private readonly IMapper _mapper;
         private readonly ILogger<BookStoreService> _logger;
         private readonly BookStoreDbContext _dbContext;
-        public BookStoreService(BookStoreDbContext bookStoreDbContext, ILogger<BookStoreService> logger, IMapper mapper)
+        private readonly IValidator<UserDto> _userValidator;
+        public BookStoreService(BookStoreDbContext bookStoreDbContext, ILogger<BookStoreService> logger, IMapper mapper, IValidator<UserDto> userValidator)
         {
             _dbContext = bookStoreDbContext;
             _logger = logger;
             _mapper = mapper;
+            _userValidator = userValidator;
         }
         public IEnumerable<CreateBookDto> GetAll()
         {

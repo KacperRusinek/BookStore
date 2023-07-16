@@ -15,6 +15,8 @@ using FluentValidation.AspNetCore;
 using BookStore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init Main");
@@ -37,6 +39,7 @@ try{
     builder.Services.AddSwaggerGen();
     builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
     builder.Services.AddScoped<IBookStoreService, BookStoreService>(); //rejestracja do interfejsu
+    builder.Services.AddScoped<IReviewService, ReviewService>();
     builder.Services.AddScoped<ErrorHandlingMiddleware>();
     builder.Logging.ClearProviders();
     builder.Host.UseNLog();
@@ -45,6 +48,7 @@ try{
     builder.Services.AddScoped<IAccountService, AccountService>();
     builder.Services.AddControllers().AddFluentValidation();
     builder.Services.AddScoped<IValidator<UserDto>, RegisterUserValidator>();
+    builder.Services.AddScoped<IValidator<CreateBookDto>, CreateBookValidator>();
     builder.Configuration.GetSection("Authentication").Bind(aths);
     builder.Services.AddSingleton(aths);
     builder.Services.AddAuthentication(option =>

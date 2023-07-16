@@ -788,7 +788,7 @@
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
         }
       },
-      "NLog/5.2.1": {
+      "NLog/5.2.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/NLog.dll": {
@@ -801,12 +801,12 @@
           }
         }
       },
-      "NLog.Extensions.Logging/5.3.1": {
+      "NLog.Extensions.Logging/5.3.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0",
           "Microsoft.Extensions.Logging": "6.0.0",
-          "NLog": "5.2.1"
+          "NLog": "5.2.2"
         },
         "compile": {
           "lib/net6.0/NLog.Extensions.Logging.dll": {
@@ -819,10 +819,10 @@
           }
         }
       },
-      "NLog.Web.AspNetCore/5.3.1": {
+      "NLog.Web.AspNetCore/5.3.2": {
         "type": "package",
         "dependencies": {
-          "NLog.Extensions.Logging": "5.3.1"
+          "NLog.Extensions.Logging": "5.3.2"
         },
         "compile": {
           "lib/net6.0/NLog.Web.AspNetCore.dll": {
@@ -2716,10 +2716,10 @@
         "mono.texttemplating.nuspec"
       ]
     },
-    "NLog/5.2.1": {
-      "sha512": "8H679iScYqXuas/f5CQ/JNRsqui/ENmk4XKWGFpGLomoASRl0vcOkQits01Iquc2ShB52wjjci3LVE8IUnFbxw==",
+    "NLog/5.2.2": {
+      "sha512": "r6Q9740g29gTwmTWlsgdIFm0mhNsfNZmbvWKX/Fxmi8X89ZrpUowHM2T2X1lP7RVpND+ef+XnfKL5g6Q1iNGXA==",
       "type": "package",
-      "path": "nlog/5.2.1",
+      "path": "nlog/5.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2736,14 +2736,14 @@
         "lib/netstandard1.5/NLog.xml",
         "lib/netstandard2.0/NLog.dll",
         "lib/netstandard2.0/NLog.xml",
-        "nlog.5.2.1.nupkg.sha512",
+        "nlog.5.2.2.nupkg.sha512",
         "nlog.nuspec"
       ]
     },
-    "NLog.Extensions.Logging/5.3.1": {
-      "sha512": "RvADdk+YD4qdVvmByolGkncId2WNN6iQBMuMnj/7pK5nu81hfBmYIH1dsj67WbH9pxhA0FygI3zUWoliVxmylw==",
+    "NLog.Extensions.Logging/5.3.2": {
+      "sha512": "v6swUNj9KHH4tWKH3+eCuFsp/BfpkWmbz1XPCIXb9fnSVsEHcfyRnfXjuksfMdIULgR/i1RzbQUU8WsNVpBglg==",
       "type": "package",
-      "path": "nlog.extensions.logging/5.3.1",
+      "path": "nlog.extensions.logging/5.3.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2761,14 +2761,14 @@
         "lib/netstandard2.0/NLog.Extensions.Logging.xml",
         "lib/netstandard2.1/NLog.Extensions.Logging.dll",
         "lib/netstandard2.1/NLog.Extensions.Logging.xml",
-        "nlog.extensions.logging.5.3.1.nupkg.sha512",
+        "nlog.extensions.logging.5.3.2.nupkg.sha512",
         "nlog.extensions.logging.nuspec"
       ]
     },
-    "NLog.Web.AspNetCore/5.3.1": {
-      "sha512": "CAIh9NjPR0QG6jbUZ/z2ktdMhOiK31ZHBkAhAEDqqEq/LlNxqx2LPnLgRlQHgM3h2o45tcvoQ2lsYmtSmU4UYA==",
+    "NLog.Web.AspNetCore/5.3.2": {
+      "sha512": "SLBeDj30nu1sjc3DsPhTdXSL90915eeQknYbSCZOthccxqVJS1RZna0sh746kDaD21ktnYMubXT+gNWgn3oGpA==",
       "type": "package",
-      "path": "nlog.web.aspnetcore/5.3.1",
+      "path": "nlog.web.aspnetcore/5.3.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2784,7 +2784,7 @@
         "lib/netcoreapp3.1/NLog.Web.AspNetCore.xml",
         "lib/netstandard2.0/NLog.Web.AspNetCore.dll",
         "lib/netstandard2.0/NLog.Web.AspNetCore.xml",
-        "nlog.web.aspnetcore.5.3.1.nupkg.sha512",
+        "nlog.web.aspnetcore.5.3.2.nupkg.sha512",
         "nlog.web.aspnetcore.nuspec"
       ]
     },
@@ -4259,7 +4259,7 @@
       "Microsoft.EntityFrameworkCore >= 7.0.9",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.9",
-      "NLog.Web.AspNetCore >= 5.3.1",
+      "NLog.Web.AspNetCore >= 5.3.2",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
@@ -4337,7 +4337,7 @@
           },
           "NLog.Web.AspNetCore": {
             "target": "Package",
-            "version": "[5.3.1, )"
+            "version": "[5.3.2, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
