@@ -43,7 +43,6 @@ namespace BookStore.Controller
             return books;
         }
 
-
         [HttpGet("SortAscDesc")]
         [AllowAnonymous]
         public IEnumerable<CreateBookDto> GetAscDesc(string SortOrder)
@@ -79,8 +78,6 @@ namespace BookStore.Controller
                 return Ok(books);
             }
         }
-
-       
 
         [HttpPut("UpdateById")]
         [AllowAnonymous]
