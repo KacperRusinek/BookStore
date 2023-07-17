@@ -6,7 +6,6 @@ using NLog;
 using NLog.Web;
 using System.Linq.Expressions;
 using AutoMapper;
-using BookStore.Controllers;
 using Microsoft.AspNetCore.Identity;
 using FluentValidation;
 using BookStore.Models;
@@ -16,16 +15,17 @@ using BookStore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
-
+using BookStore.Mappings;
 
 var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("init Main");
-try{
+try
+{
 
     var builder = WebApplication.CreateBuilder(args);
 
     var aths = new AuthenticationSettings();
-   
+
 
 
 
@@ -67,12 +67,12 @@ try{
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(aths.JwtKey)),
         };
     });
-        
+
     var app = builder.Build();
     //app.UseMiddleware<ErrorHandlingMiddleware>();
-    
 
-    
+
+
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
@@ -84,17 +84,18 @@ try{
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
-  
+
 
     app.MapControllers();
 
     app.Run();
 }
-catch(Exception e)
+catch (Exception e)
 {
     Console.WriteLine(e.Message);
     logger.Error(e);
-} finally
+}
+finally
 {
     LogManager.Shutdown();
 }

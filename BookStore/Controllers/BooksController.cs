@@ -3,23 +3,36 @@ using BookStore.Models;
 using BookStore.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
+
 using static System.Reflection.Metadata.BlobBuilder;
 
-namespace BookStore.Controllers
+
+namespace BookStore.Controller
 {
     [ApiController]
     [Route("api/BookStore")]
     [Authorize]
-    public class BooksControllercs : ControllerBase
+    public class BooksController : ControllerBase
     {
 
         private readonly ILogger<BookStoreService> _logger;
         private readonly IBookStoreService _bookStoreService;
-        public BooksControllercs(IBookStoreService bookStoreService, ILogger<BookStoreService> logger)
+        public BooksController(IBookStoreService bookStoreService, ILogger<BookStoreService> logger)
         {
             _bookStoreService = bookStoreService;
             _logger = logger;
+        }
+
+        [HttpPost("AddBook")]
+        [AllowAnonymous]
+        public ActionResult Create([FromBody] CreateBookDto addBook)
+        {
+            var id = _bookStoreService.Create(addBook);
+            return Created($"/api/restaurant/{id}", null);
+
         }
 
         [HttpGet("GetAll")]
@@ -33,7 +46,7 @@ namespace BookStore.Controllers
 
         [HttpGet("SortAscDesc")]
         [AllowAnonymous]
-        public IEnumerable<CreateBookDto> GetAscDesc(string SortOrder)  //metoda do pobierania książek asc/desc
+        public IEnumerable<CreateBookDto> GetAscDesc(string SortOrder)
         {
             var books = _bookStoreService.GetAscDesc(SortOrder);
             return books;
@@ -65,17 +78,9 @@ namespace BookStore.Controllers
             {
                 return Ok(books);
             }
-
         }
 
-        [HttpPost("AddBook")]
-        [AllowAnonymous]
-        public ActionResult Create([FromBody] CreateBookDto addBook)
-        {
-            var id = _bookStoreService.Create(addBook);
-            return Created($"/api/restaurant/{id}", null);
-
-        }
+       
 
         [HttpPut("UpdateById")]
         [AllowAnonymous]
@@ -107,19 +112,7 @@ namespace BookStore.Controllers
             {
                 return NotFound();
             }
-
         }
-
-
-
-
-
-
-
-
     }
-
-
-
 }
 

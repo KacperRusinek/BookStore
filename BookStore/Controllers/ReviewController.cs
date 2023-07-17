@@ -10,7 +10,6 @@ namespace BookStore.Controllers
     [Route("api/Review")]
     public class ReviewController : Controller
     {
-
         private readonly IReviewService _reviewService;
         public ReviewController(IReviewService reviewService, ILogger<BookStoreService> logger)
         {
@@ -63,6 +62,5 @@ namespace BookStore.Controllers
             }
             return Ok();
         }
-
     }
 }

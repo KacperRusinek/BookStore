@@ -19,15 +19,12 @@ namespace BookStore.Controllers
         {
             _accountService = accountService;
             _mapper = mapper;
-
         }
 
-        [HttpPost("register")]// oprocz zwyklej sciezki jak kontroler bedzie jeszcze register
+        [HttpPost("register")]
         public ActionResult RegisterUser([FromBody] UserDto dto)
         {
             _accountService.RegisterUser(dto);
-            //var responseDto = _mapper.Map<UserDto>(dto);
-            //responseDto.Role = null;
             return Ok();
 
         }

@@ -74,7 +74,5 @@ namespace BookStore.Services
 
             return true;
         }
-
-
     }
 }

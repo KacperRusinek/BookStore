@@ -12,9 +12,8 @@ using FluentValidation;
 namespace BookStore.Services
 {
     public class BookStoreService : IBookStoreService
-    //logika do obsługiwania zapytań http
     {
-     
+
         private readonly IMapper _mapper;
         private readonly ILogger<BookStoreService> _logger;
         private readonly BookStoreDbContext _dbContext;
@@ -26,16 +25,20 @@ namespace BookStore.Services
             _mapper = mapper;
             _userValidator = userValidator;
         }
+        public int Create(CreateBookDto addBook)
+        {
+            var book = _mapper.Map<CreateBook>(addBook);
+            _dbContext.Books.Add(book);
+            _dbContext.SaveChanges();
+            return book.Id;
+        }
         public IEnumerable<CreateBookDto> GetAll()
         {
             var books = _dbContext.Books.ToList();
             var booksDto = _mapper.Map<List<CreateBookDto>>(books);
             return booksDto;
         }
-        public IEnumerable<CreateBook> GetAllBooks()
-        {
-            return _dbContext.Books.ToList();
-        }
+
 
         public IEnumerable<CreateBookDto> GetAscDesc(string SortOrder)
         {
@@ -55,29 +58,15 @@ namespace BookStore.Services
                         break;
                 }
             }
-
             return books;
         }
-
-
-
 
         public CreateBookDto GetById(int id)
         {
             var book = _dbContext.Books.FirstOrDefault(b => b.Id == id);
-        
-                var bookDto = _mapper.Map<CreateBookDto>(book);
-                return bookDto;
-            
-            
-        }
-        public int Create(CreateBookDto addBook)
-        {
-            var book = _mapper.Map<CreateBook>(addBook);
-            _dbContext.Books.Add(book);
-            _dbContext.SaveChanges();
 
-            return book.Id;
+            var bookDto = _mapper.Map<CreateBookDto>(book);
+            return bookDto;
         }
 
         public bool UpdateBook(int id, UpdateBookDto updateBook)
@@ -85,7 +74,6 @@ namespace BookStore.Services
             var book = _dbContext.Books.Find(id);
             if (book != null)
             {
-                // Aktualizacja właściwości książki na podstawie obiektu updateBook
                 book.Title = updateBook.Title;
                 book.FirstNameOfAuthor = updateBook.FirstNameOfAuthor;
                 book.LastNameOfAuthor = updateBook.LastNameOfAuthor;
@@ -101,7 +89,7 @@ namespace BookStore.Services
 
         public bool DeleteBook(int id)
         {
-            //_logger.LogWarning($"Restaurant with id {id} deleted now"); //jeżeli klient wyśle zapytanie to zostanie to wyświetlone
+            //_logger.LogWarning($"Restaurant with id {id} deleted now"); 
             var book = _dbContext.Books.Find(id);
             if (book != null)
             {
@@ -111,9 +99,7 @@ namespace BookStore.Services
             }
             return false;
         }
-
-        //[NonAction]
-        public IEnumerable<CreateBookDto> GetBookByNumberOfPages(int NumberOfPages) //filtrowanie ksiazek do max stron
+        public IEnumerable<CreateBookDto> GetBookByNumberOfPages(int NumberOfPages)
         {
             var books = _dbContext
                 .Books
@@ -128,9 +114,6 @@ namespace BookStore.Services
             var booksDto = _mapper.Map<List<CreateBookDto>>(books);
             return booksDto;
         }
-       
-
-
 
     }
 }

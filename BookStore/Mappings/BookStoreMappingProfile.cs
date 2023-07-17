@@ -2,7 +2,7 @@
 using BookStore.Data;
 using BookStore.Models;
 
-namespace BookStore.Controllers
+namespace BookStore.Mappings
 {
     public class BookStoreMappingProfile : Profile
     {
@@ -17,6 +17,7 @@ namespace BookStore.Controllers
                 .ForMember(m => m.NumberOfPages, c => c.MapFrom(s => s.NumberOfPages))
                 .ForMember(m => m.Rating, c => c.MapFrom(s => s.Rating))
                 .ForMember(m => m.PublicationDate, c => c.MapFrom(s => s.PublicationDate));
+
             CreateMap<CreateBookDto, CreateBook>()
                 .ForMember(m => m.Title, c => c.MapFrom(s => s.Title))
                 .ForMember(m => m.FirstNameOfAuthor, c => c.MapFrom(s => s.FirstNameOfAuthor))
@@ -25,18 +26,18 @@ namespace BookStore.Controllers
                 .ForMember(m => m.NumberOfPages, c => c.MapFrom(s => s.NumberOfPages))
                  .ForMember(m => m.Rating, c => c.MapFrom(s => s.Rating))
                 .ForMember(m => m.PublicationDate, c => c.MapFrom(s => s.PublicationDate));
+
             CreateMap<ReviewDto, Review>()
               .ForMember(m => m.Content, c => c.MapFrom(s => s.Content));
+
             CreateMap<Review, ReviewDto>()
-          .ForMember(m => m.Content, c => c.MapFrom(s => s.Content));
+             .ForMember(m => m.Content, c => c.MapFrom(s => s.Content));
 
             CreateMap<UserDto, User>();
             CreateMap<User, UserDto>();
 
             CreateMap<CreateBook, CreateBookDto>();
             CreateMap<CreateBookDto, CreateBook>();
-
         }
     }
-
 }

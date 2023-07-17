@@ -95,3 +95,4 @@ C:\Users\User\Desktop\Nowy\BookStore\BookStore\obj\Debug\net6.0\staticwebassets\
 C:\Users\User\Desktop\Nowy\BookStore\BookStore\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.BookStore.props
 C:\Users\User\Desktop\Nowy\BookStore\BookStore\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.BookStore.props
 C:\Users\User\Desktop\Nowy\BookStore\BookStore\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\User\Desktop\Nowy\BookStore\BookStore\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll
