@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BookStore.Data;
+using BookStore.Interfaces;
 using BookStore.Models;
-using BookStore.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Identity.Client;

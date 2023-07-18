@@ -1,13 +1,13 @@
 ﻿using BookStore.Models;
 using BookStore.Data;
 
-namespace BookStore.Services
+namespace BookStore.Interfaces
 {
     public interface IReviewService
     {
         public int AddReviewByTitle(string title, ReviewDto dto);
         public IEnumerable<ReviewDto> GetReviewsByBookTitle(string bookTitle);
         public ReviewDto UpdateReview(int reviewId, ReviewDto reviewDto);
-        bool DeleteReview(int reviewId);
+        public bool DeleteReview(int reviewId);
     }
 }

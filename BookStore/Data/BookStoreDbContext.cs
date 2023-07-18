@@ -47,6 +47,5 @@ namespace BookStore.Data
                 });
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

@@ -8,12 +8,12 @@ using System.Globalization;
 using static System.Reflection.Metadata.BlobBuilder;
 using Microsoft.Data.SqlClient;
 using FluentValidation;
+using BookStore.Interfaces;
 
 namespace BookStore.Services
 {
     public class BookStoreService : IBookStoreService
     {
-
         private readonly IMapper _mapper;
         private readonly ILogger<BookStoreService> _logger;
         private readonly BookStoreDbContext _dbContext;
@@ -39,7 +39,6 @@ namespace BookStore.Services
             return booksDto;
         }
 
-
         public IEnumerable<CreateBookDto> GetAscDesc(string SortOrder)
         {
             var books = GetAll();
@@ -60,7 +59,6 @@ namespace BookStore.Services
             }
             return books;
         }
-
         public CreateBookDto GetById(int id)
         {
             var book = _dbContext.Books.FirstOrDefault(b => b.Id == id);
@@ -68,7 +66,6 @@ namespace BookStore.Services
             var bookDto = _mapper.Map<CreateBookDto>(book);
             return bookDto;
         }
-
         public bool UpdateBook(int id, UpdateBookDto updateBook)
         {
             var book = _dbContext.Books.Find(id);
@@ -86,10 +83,8 @@ namespace BookStore.Services
             }
             return false;
         }
-
         public bool DeleteBook(int id)
         {
-            //_logger.LogWarning($"Restaurant with id {id} deleted now"); 
             var book = _dbContext.Books.Find(id);
             if (book != null)
             {
@@ -114,6 +109,5 @@ namespace BookStore.Services
             var booksDto = _mapper.Map<List<CreateBookDto>>(books);
             return booksDto;
         }
-
     }
 }

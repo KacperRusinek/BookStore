@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.Data;
+using BookStore.Interfaces;
 using BookStore.Models;
 
 namespace BookStore.Services
@@ -14,7 +15,6 @@ namespace BookStore.Services
             _dbContext = bookStoreDbContext;
             _mapper = mapper;
         }
-
         public int AddReviewByTitle(string title, ReviewDto dto)
         {
             var book = _dbContext.Books.FirstOrDefault(b => b.Title == title);
@@ -28,16 +28,14 @@ namespace BookStore.Services
                 return review.Id;
             }
             return 0;
-
         }
-
         public IEnumerable<ReviewDto> GetReviewsByBookTitle(string bookTitle)
         {
             var book = _dbContext.Books.FirstOrDefault(b => b.Title == bookTitle);
 
             if (book == null)
             {
-                return null; // Pusta lista recenzji, jeśli nie znaleziono książki
+                return null; 
             }
 
             var reviews = _dbContext.Reviews
@@ -55,8 +53,6 @@ namespace BookStore.Services
             }
 
             existingReview.Content = reviewDto.Content;
-           // existingReview.Rating = reviewDto.Rating;
-
             _dbContext.SaveChanges();
 
             return _mapper.Map<ReviewDto>(existingReview);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.Data;
+using BookStore.Interfaces;
 using BookStore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -36,11 +37,10 @@ namespace BookStore.Services
             var user = _dbContext.Users
                 .Include(u => u.Role)
                 .FirstOrDefault(u => u.Email == dto.Email);
-                
             
             if(user is null) 
             {
-                throw new BadHttpRequestException("Invalid username or password"); //wyjątek do obsłużenia w middleware
+                throw new BadHttpRequestException("Invalid username or password");
             }
 
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, dto.Password);
@@ -69,7 +69,6 @@ namespace BookStore.Services
                 signingCredentials: cred);
             var tokenHandler = new JwtSecurityTokenHandler();
             return tokenHandler.WriteToken(token);
-
         }
 
     }

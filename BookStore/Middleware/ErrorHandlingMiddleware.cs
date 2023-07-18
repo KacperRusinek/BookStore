@@ -17,9 +17,7 @@ namespace BookStore.Middleware
             try
             {
                 await next.Invoke(context);
-
             }
-
             catch (BadHttpRequestException badHttpRequestException)
             {
                 context.Response.StatusCode = 400;

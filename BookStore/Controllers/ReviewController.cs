@@ -1,4 +1,5 @@
-﻿using BookStore.Models;
+﻿using BookStore.Interfaces;
+using BookStore.Models;
 using BookStore.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +9,7 @@ namespace BookStore.Controllers
 {
     [ApiController]
     [Route("api/Review")]
-    public class ReviewController : Controller
+    public class ReviewController : ControllerBase
     {
         private readonly IReviewService _reviewService;
         public ReviewController(IReviewService reviewService, ILogger<BookStoreService> logger)
